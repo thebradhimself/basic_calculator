@@ -4,11 +4,9 @@ $(document).ready(function(){
   var $operatorButton = $('.operButton');
   var $equalButton = $('.equalsButton');
   var $clearScreenButton = $('.clsButton');
-
   var firstNumber = '';
   var secondNumber = '';
   var symbol = '';
-
 
   $numberButton.click(function(){
     symbol == '' ? firstNumber += this.value : secondNumber += this.value;
@@ -21,15 +19,15 @@ $(document).ready(function(){
   });
 
   $equalButton.click(function(){
-    console.log(symbol);
     if(symbol == '+' || symbol == '-' || symbol == "*" || symbol == '/'){
-      firstNumber = $inputField.html(eval($inputField.html()));
+      $inputField.html(eval($inputField.html()));
+      firstNumber = eval($inputField.html());
     }
     else if(symbol == "√")
       $inputField.html(Math.sqrt(secondNumber));
     else if(symbol == "^")
       $inputField.html(Math.pow(firstNumber, secondNumber));
-    else{}
+    else{alert('you dun fucked up, son')}
     symbol = '';
     secondNumber = '';
   });
@@ -40,8 +38,4 @@ $(document).ready(function(){
     secondNumber = '';
     $inputField.html('');
   });
-
-  function clearIt(){
-
-  }
 });
