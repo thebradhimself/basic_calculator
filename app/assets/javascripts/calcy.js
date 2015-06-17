@@ -1,148 +1,47 @@
-var button1 = document.getElementById('number1');
-var button2 = document.getElementById('number2');
-var button3 = document.getElementById('number3');
-var button4 = document.getElementById('number4');
-var button5 = document.getElementById('number5');
-var button6 = document.getElementById('number6');
-var button7 = document.getElementById('number7');
-var button8 = document.getElementById('number8');
-var button9 = document.getElementById('number9');
-var button0 = document.getElementById('number0');
-var buttoncls = document.getElementById('clsbutton');
+$(document).ready(function(){
+  var $numberButton = $('.numButton');
+  var $inputField = $('#inputfield');
+  var $operatorButton = $('.operButton');
+  var $equalButton = $('.equalsButton');
+  var $clearScreenButton = $('.clsButton');
 
-var buttonPlus = document.getElementById('symbolPlus');
-var buttonMinus = document.getElementById('symbolMinus');
-var buttonTimes = document.getElementById('symbolTimes');
-var buttonDivide = document.getElementById('symbolDivide');
-var buttonEquals = document.getElementById('symbolEquals');
-var buttonSqrt = document.getElementById('symbolSqrt');
-var buttonPower = document.getElementById('symbolPower');
-var buttonDot = document.getElementById('symbolPeriod');
+  var firstNumber = '';
+  var secondNumber = '';
+  var symbol = '';
 
 
-var firstNumber = '';
-var secondNumber = '';
-var symbol = '';
+  $numberButton.click(function(){
+    symbol == '' ? firstNumber += this.value : secondNumber += this.value;
+    $inputField.append(this.value);
+  });
 
-function whatPushed(num){
-  if(isNaN(num) && num != "."){
-    symbol = num;
-    document.getElementById("inputfield").innerHTML = firstNumber + symbol;
-  }
-  else if(symbol == ''){
-    firstNumber += num;
-    document.getElementById("inputfield").innerHTML = firstNumber;
-  }
-  else {
-    secondNumber += num;
-    document.getElementById("inputfield").innerHTML = firstNumber + symbol + secondNumber;
-  }
-}
+  $operatorButton.click(function(){
+    symbol == '' ? $inputField.append(this.value) : alert('You\'ve already done that');
+    symbol = this.value;
+  });
 
-button1.addEventListener('click',function(){
-  whatPushed("1");
-});
+  $equalButton.click(function(){
+    console.log(symbol);
+    if(symbol == '+' || symbol == '-' || symbol == "*" || symbol == '/'){
+      firstNumber = $inputField.html(eval($inputField.html()));
+    }
+    else if(symbol == "√")
+      $inputField.html(Math.sqrt(secondNumber));
+    else if(symbol == "^")
+      $inputField.html(Math.pow(firstNumber, secondNumber));
+    else{}
+    symbol = '';
+    secondNumber = '';
+  });
 
-button2.addEventListener('click',function(){
-  whatPushed("2");
-});
+  $clearScreenButton.click(function(){
+    symbol = '';
+    firstNumber = '';
+    secondNumber = '';
+    $inputField.html('');
+  });
 
-button3.addEventListener('click',function(){
-  whatPushed("3");
-});
-
-button4.addEventListener('click',function(){
-  whatPushed("4");
-});
-
-button5.addEventListener('click',function(){
-  whatPushed("5");
-});
-
-button6.addEventListener('click',function(){
-  whatPushed("6");
-});
-
-button7.addEventListener('click',function(){
-  whatPushed("7");
-});
-
-button8.addEventListener('click',function(){
-  whatPushed("8");
-});
-
-button9.addEventListener('click',function(){
-  whatPushed("9");
-});
-
-button0.addEventListener('click',function(){
-  whatPushed("0");
-});
-
-buttonPlus.addEventListener('click',function(){
-  whatPushed("+");
-});
-
-buttonMinus.addEventListener('click',function(){
-  whatPushed("-");
-});
-
-buttonTimes.addEventListener('click',function(){
-  whatPushed("*");
-});
-
-buttonDivide.addEventListener('click',function(){
-  whatPushed("/");
-});
-
-buttonSqrt.addEventListener('click',function(){
-  whatPushed("√");
-});
-
-buttonPower.addEventListener('click',function(){
-  whatPushed("^");
-});
-
-buttoncls.addEventListener('click',function(){
-  symbol = '';
-  firstNumber = '';
-  secondNumber = '';
-  document.getElementById("inputfield").innerHTML = '';
-});
-
-buttonDot.addEventListener('click',function(){
-
-whatPushed(".")
-});
-
-
-
-
-
-buttonEquals.addEventListener('click',function(){
-
-  var equation = firstNumber + symbol + secondNumber + '=';
-
-  if(isNaN(Number(firstNumber)) || isNaN(Number(secondNumber)))
-    document.getElementById("inputfield").innerHTML = equation + "<br>" + "ERR:NONREAL ANS";
-  else if(symbol == "+")
-    document.getElementById("inputfield").innerHTML = equation + "<br>" + (Number(firstNumber) + Number(secondNumber));
-  else if(symbol == "-")
-    document.getElementById("inputfield").innerHTML = equation + "<br>" + (Number(firstNumber) - Number(secondNumber));
-  else if(symbol == "*")
-    document.getElementById("inputfield").innerHTML = equation + "<br>" + (Number(firstNumber) * Number(secondNumber));
-  else if(symbol == "/")
-    document.getElementById("inputfield").innerHTML = equation + "<br>" + (Number(firstNumber) / Number(secondNumber));
-  else if(symbol == "^")
-    document.getElementById("inputfield").innerHTML = equation + "<br>" + (Math.pow(Number(firstNumber),Number(secondNumber)));
-  else if(symbol == "√")
-    document.getElementById("inputfield").innerHTML = equation + "<br>" + (Math.sqrt(Number(secondNumber)));
-  else {
+  function clearIt(){
 
   }
-
-  symbol = '';
-  firstNumber = '';
-  secondNumber = '';
-
 });
